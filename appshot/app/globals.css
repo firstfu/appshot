@@ -5,65 +5,65 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 220 13% 19%;
+    --background: 210 30% 98%;
+    --foreground: 220 40% 16%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 13% 19%;
+    --card-foreground: 220 40% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 13% 19%;
+    --popover-foreground: 220 40% 16%;
 
-    --primary: 216 65% 22%;
+    --primary: 222 89% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 164 79% 43%;
+    --secondary: 164 85% 48%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 210 20% 96%;
     --muted-foreground: 220 9% 46%;
 
-    --accent: 210 20% 96%;
-    --accent-foreground: 216 65% 22%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 54%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 214 15% 87%;
-    --ring: 216 65% 22%;
+    --ring: 222 89% 55%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 
   .dark {
-    --background: 0 0% 7%;
+    --background: 222 47% 11%;
     --foreground: 210 20% 98%;
 
-    --card: 0 0% 12%;
+    --card: 222 47% 14%;
     --card-foreground: 210 20% 98%;
 
-    --popover: 0 0% 12%;
+    --popover: 222 47% 14%;
     --popover-foreground: 210 20% 98%;
 
-    --primary: 218 52% 34%;
+    --primary: 222 89% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 164 61% 37%;
+    --secondary: 164 80% 43%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 16%;
+    --muted: 222 47% 17%;
     --muted-foreground: 220 14% 71%;
 
-    --accent: 0 0% 16%;
-    --accent-foreground: 218 52% 34%;
+    --accent: 262 83% 63%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 54%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 27%;
-    --ring: 218 52% 34%;
+    --border: 222 47% 22%;
+    --input: 222 47% 25%;
+    --ring: 222 89% 65%;
   }
 }
 
@@ -71,31 +71,99 @@
   * {
     border-color: hsl(var(--border));
   }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
   }
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.025em;
+    line-height: 1.1;
   }
+
   h1 {
-    font-size: 28px;
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: 2rem;
     line-height: 1.2;
   }
-  h2 {
-    font-size: 22px;
-    line-height: 1.3;
-  }
+
   h3 {
-    font-size: 18px;
-    line-height: 1.35;
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+  }
+
+  /* 自定義滾動條 */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  /* 漸變背景動畫 */
+  .animated-gradient {
+    background: linear-gradient(120deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
+    background-size: 300% 300%;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* 3D 按鈕效果 */
+  .btn-3d {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+  }
+
+  .btn-3d:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .btn-3d:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
   }
 }
