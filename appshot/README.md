@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AppShot - App Store 截圖生成工具
 
-## Getting Started
+AppShot 是一款無需註冊、即用即走的 App Store 截圖生成工具，專為 iOS 應用開發者設計。訪問網站即可上傳您的應用截圖，快速生成符合 App Store 上架規範的設備外殼截圖。
 
-First, run the development server:
+## 特色
+
+- **即時使用**：無需註冊和登入，訪問網站即可使用
+- **簡單直覺**：三步驟操作，上傳 → 選擇設備 → 下載
+- **隱私優先**：所有處理在本地完成，無資料上傳
+- **符合規範**：生成符合 App Store 要求的標準截圖
+
+## 支援的設備
+
+- iPhone 14/15 (6.1 吋)
+- iPad Pro 12.9 吋
+
+## 技術架構
+
+- Next.js 15 (App Router)
+- React 19
+- Tailwind CSS
+- Canvas API 圖像處理
+- shadcn/ui 組件庫
+
+## 本地開發
+
+### 前提條件
+
+- Node.js v20 或更高版本
+- npm v10 或更高版本
+
+### 安裝
+
+1. 克隆倉庫
+
+```bash
+git clone [repository-url]
+cd appshot
+```
+
+2. 安裝依賴
+
+```bash
+npm install
+```
+
+3. 運行開發伺服器
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+應用將在 [http://localhost:3000](http://localhost:3000) 啟動。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 構建生產版本
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 設備模型
 
-To learn more about Next.js, take a look at the following resources:
+您需要將設備模型圖像放在 `public/device-models/` 目錄中：
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `iphone-14.png` - iPhone 14/15 6.1 吋模型
+- `ipad-pro.png` - iPad Pro 12.9 吋模型
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 授權
 
-## Deploy on Vercel
+本專案採用 MIT 授權條款 - 詳見 LICENSE 文件
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 貢獻
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+歡迎提交 Pull Request 或開設 Issue 討論您想添加的功能或報告問題。
