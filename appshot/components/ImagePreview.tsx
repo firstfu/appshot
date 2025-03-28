@@ -139,18 +139,61 @@ export default function ImagePreview({ image, device, darkMode, onCanvasRef }: I
   };
 
   return (
-    <Card className="w-full">
-      <CardContent className="p-4">
-        <div className="w-full flex justify-center items-center">
+    <Card className="w-full overflow-hidden border-2 transition-all duration-200 hover:shadow-md">
+      <CardContent className="p-6 relative min-h-[400px]">
+        <div className="w-full h-full flex justify-center items-center">
           {isRendering && (
-            <div className="text-center py-8">
-              <p>正在渲染預覽...</p>
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-background/80 backdrop-blur-sm">
+              <div className="h-12 w-12 rounded-full border-t-2 border-b-2 border-primary animate-spin mb-4"></div>
+              <p className="text-base font-medium">正在渲染預覽...</p>
+              <p className="text-sm text-muted-foreground mt-1">高品質渲染中，請稍候</p>
             </div>
           )}
-          <canvas ref={canvasRef} className={`max-w-full max-h-[70vh] object-contain ${isRendering ? "hidden" : ""}`} />
+
+          <div className={`relative transition-all duration-500 ${image ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}>
+            <div className="absolute -inset-px rounded-lg bg-gradient-to-tr from-primary/20 via-secondary/20 to-primary/20 blur-sm -z-10"></div>
+            <canvas
+              ref={canvasRef}
+              className={`max-w-full max-h-[70vh] object-contain rounded shadow-lg transition-transform duration-300 hover:scale-[1.01] ${
+                image ? "" : "hidden"
+              }`}
+            />
+          </div>
+
           {!image && (
-            <div className="text-center py-8">
-              <p>請先上傳截圖</p>
+            <div className="text-center py-12 px-6 flex flex-col items-center">
+              <div className="w-20 h-20 rounded-full bg-muted/50 flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-medium mb-2">預覽區域</h3>
+              <p className="text-muted-foreground max-w-md">請先上傳您的應用截圖，在此處可以預覽模擬在不同設備上的效果</p>
+              <div className="grid grid-cols-3 gap-4 mt-6 text-xs text-center w-full max-w-sm">
+                <div className="flex flex-col items-center">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-1">
+                    <span className="text-primary">1</span>
+                  </div>
+                  <span>上傳截圖</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-1">
+                    <span className="text-primary">2</span>
+                  </div>
+                  <span>選擇設備</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-1">
+                    <span className="text-primary">3</span>
+                  </div>
+                  <span>下載成品</span>
+                </div>
+              </div>
             </div>
           )}
         </div>

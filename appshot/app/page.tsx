@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, forwardRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Header from "../components/Header";
 import ImageUploader from "../components/ImageUploader";
 import DeviceSelector from "../components/DeviceSelector";
@@ -34,34 +34,53 @@ export default function Home() {
 
   return (
     <main className={`min-h-screen ${darkMode ? "dark" : ""}`}>
-      <div className="container mx-auto px-4 py-8">
-        <Header />
+      <div className="bg-gradient-to-b from-background to-muted/20 min-h-screen">
+        <div className="container mx-auto px-4 py-8">
+          <Header />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div className="md:col-span-1 space-y-6">
-            <ImageUploader onImageUpload={handleImageUpload} isProcessing={isProcessing} />
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+              <div className="md:col-span-1 space-y-6">
+                <ImageUploader onImageUpload={handleImageUpload} isProcessing={isProcessing} />
 
-            <DeviceSelector
-              devices={deviceTypes}
-              selectedDevice={selectedDevice}
-              onSelectDevice={changeDevice}
-              darkMode={darkMode}
-              onToggleDarkMode={toggleDarkMode}
-            />
+                <DeviceSelector
+                  devices={deviceTypes}
+                  selectedDevice={selectedDevice}
+                  onSelectDevice={changeDevice}
+                  darkMode={darkMode}
+                  onToggleDarkMode={toggleDarkMode}
+                />
 
-            <div className="flex justify-center mt-4">
-              <DownloadButton canvasElement={canvasElement} device={selectedDevice} disabled={!uploadedImage} />
+                <div className="mt-6">
+                  <DownloadButton canvasElement={canvasElement} device={selectedDevice} disabled={!uploadedImage} />
+                </div>
+              </div>
+
+              <div className="md:col-span-2">
+                <ImagePreview image={uploadedImage} device={selectedDevice} darkMode={darkMode} onCanvasRef={handleCanvasRef} />
+              </div>
             </div>
           </div>
 
-          <div className="md:col-span-2">
-            <ImagePreview image={uploadedImage} device={selectedDevice} darkMode={darkMode} onCanvasRef={handleCanvasRef} />
-          </div>
+          <footer className="max-w-6xl mx-auto mt-16 pb-6 border-t border-border/40 pt-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="md:col-span-2">
+                <p className="text-sm text-muted-foreground">© 2024 AppShot - 無需註冊的 App Store 截圖生成工具。使用本工具表示您同意遵守我們的服務條款。</p>
+              </div>
+              <div className="flex justify-start md:justify-end gap-4">
+                <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  幫助
+                </a>
+                <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  隱私
+                </a>
+                <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  條款
+                </a>
+              </div>
+            </div>
+          </footer>
         </div>
-
-        <footer className="mt-12 text-center text-sm text-muted-foreground">
-          <p>© 2024 AppShot - 無需註冊的 App Store 截圖生成工具</p>
-        </footer>
       </div>
     </main>
   );

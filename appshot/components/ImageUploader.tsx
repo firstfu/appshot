@@ -62,15 +62,22 @@ export default function ImageUploader({ onImageUpload, isProcessing }: ImageUplo
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="text-center">上傳截圖</CardTitle>
+    <Card className="w-full overflow-hidden border-2 transition-all duration-200 hover:shadow-md">
+      <CardHeader className="bg-gradient-to-r from-primary/5 to-secondary/5 pb-2">
+        <CardTitle className="text-center flex items-center justify-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <path d="M21 15l-5-5L5 21"></path>
+          </svg>
+          上傳截圖
+        </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-4">
         <div
           className={cn(
-            "border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors",
-            isDragging ? "border-primary bg-primary/5" : "border-border hover:border-primary/50",
+            "border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-300",
+            isDragging ? "border-secondary bg-secondary/5 scale-[0.99] shadow-inner" : "border-border hover:border-primary/50 hover:bg-primary/5",
             isProcessing && "opacity-50 cursor-not-allowed"
           )}
           onDragOver={handleDragOver}
@@ -78,21 +85,32 @@ export default function ImageUploader({ onImageUpload, isProcessing }: ImageUplo
           onDrop={handleDrop}
           onClick={isProcessing ? undefined : handleButtonClick}
         >
-          <div className="flex flex-col items-center justify-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-muted-foreground mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
+          <div className="flex flex-col items-center justify-center gap-3">
             {isProcessing ? (
-              <p className="text-base">正在處理圖片...</p>
+              <div className="flex flex-col items-center">
+                <div className="h-12 w-12 rounded-full border-t-2 border-b-2 border-primary animate-spin mb-2"></div>
+                <p className="text-base font-medium">正在處理圖片...</p>
+                <p className="text-sm text-muted-foreground mt-1">請稍候片刻</p>
+              </div>
             ) : (
               <>
-                <p className="text-base font-medium">拖放截圖至此處或點擊上傳</p>
+                <div
+                  className={cn(
+                    "h-16 w-16 rounded-full flex items-center justify-center bg-primary/10 text-primary transition-transform duration-300",
+                    isDragging ? "scale-110" : "hover:scale-110"
+                  )}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                </div>
+                <p className="text-base font-medium mt-2">拖放截圖至此處或點擊上傳</p>
                 <p className="text-sm text-muted-foreground">支援 JPG、PNG 格式，最大 10MB</p>
+                <div className="flex items-center mt-2 text-xs text-muted-foreground">
+                  <span className="inline-block w-5 h-px bg-muted-foreground/30 mr-2"></span>
+                  或直接從剪貼簿貼上
+                  <span className="inline-block w-5 h-px bg-muted-foreground/30 ml-2"></span>
+                </div>
               </>
             )}
           </div>
@@ -104,6 +122,18 @@ export default function ImageUploader({ onImageUpload, isProcessing }: ImageUplo
             onChange={handleFileChange}
             disabled={isProcessing}
           />
+        </div>
+
+        <div className="mt-3 grid grid-cols-3 gap-1 text-xs text-center">
+          <div className="p-1 rounded bg-muted/50">
+            <p className="font-medium">高解析度</p>
+          </div>
+          <div className="p-1 rounded bg-muted/50">
+            <p className="font-medium">自動壓縮</p>
+          </div>
+          <div className="p-1 rounded bg-muted/50">
+            <p className="font-medium">多種設備</p>
+          </div>
         </div>
       </CardContent>
     </Card>
